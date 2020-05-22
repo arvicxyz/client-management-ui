@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<v:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:v="clr-namespace:XamApp.Views"
+                   xmlns:vm="clr-namespace:XamApp.ViewModels"
+                   xmlns:expander="clr-namespace:Syncfusion.XForms.Expander;assembly=Syncfusion.Expander.XForms"
+                   xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+                   xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                   xmlns:imagecircle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+                   x:TypeArguments="vm:ClientListPageViewModel"
+                   x:Class="XamApp.Views.ClientListPage"
+                   NavigationPage.HasNavigationBar="False"
+                   Title="{Binding PageTitle}"
+                   BackgroundColor="{StaticResource PageBgColor}">
+    <ContentPage.Resources>
+        <buttons:SfRadioGroupKey x:Key="filter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     Spacing="0">
+
+            <!-- # Start # Toolbar -->
+            <StackLayout Spacing="0">
+                <Grid VerticalOptions="Center"
+                        Padding="20,0"
+                        ColumnSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource ToolbarHeight}" />
+                    </Grid.RowDefinitions>
+                    <Image Source="{StaticResource LogoFile}"
+                           HeightRequest="35"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+                </Grid>
+            </StackLayout>
+            <!-- # End # Toolbar -->
+
+            <Grid VerticalOptions="FillAndExpand"
+                  HorizontalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*" />
+                    <RowDefinition Height="70*" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.RowSpan="2"
+                             Spacing="0">
+                    <Grid ColumnSpacing="0"
+                          IsVisible="{Binding IsSearchBarVisible}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <SearchBar Grid.Column="0"
+                                   Text="{Binding SearchText}"
+                                   Placeholder="Search clients"
+                                   HorizontalOptions="Fill"
+                                   HorizontalTextAlignment="Start"
+                                   FontSize="{StaticResource InputFontSize}"
+                                   TextColor="{StaticResource PrimaryTextColor}"
+                                   PlaceholderColor="{StaticResource SecondaryTextColor}"
+                                   CancelButtonColor="{StaticResource AccentColor}"
+                                   BackgroundColor="{StaticResource MainLightBgColor}"
+                                   TextChanged="SearchBarTextChanged"
+                                   SearchCommand="{Binding SearchCommand}">
+                            <SearchBar.Margin>
+                                <OnPlatform x:TypeArguments="Thickness"
+                                    iOS="0"
+                                    Android="0,8" />
+                            </SearchBar.Margin>
+                            <SearchBar.HeightRequest>
+                                <OnPlatform x:TypeArguments="x:Double"
+                                    iOS="50"
+                                    Android="40" />
+                            </SearchBar.HeightRequest>
+                        </SearchBar>
+                        <Image Grid.Column="1"
+                               Source="ic_filter"
+                               HorizontalOptions="End"
+                               WidthRequest="25"
+                               HeightRequest="25"
+                               Margin="5,0,15,0"
+                               Aspect="AspectFit">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="FilterTapped" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Image Grid.Column="2"
+                               Source="{Binding SortIconImage}"
+                               HorizontalOptions="End"
+                               WidthRequest="28"
+                               HeightRequest="28"
+                               Margin="0,0,10,0"
+                               Aspect="AspectFit"
+                               Opacity="{Binding SortOpacity}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SortTapped" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                    <expander:SfExpander AnimationEasing="SinOut"
+                                         AnimationDuration="250"
+                                         IsExpanded="{Binding WillFilter}">
+                        <expander:SfExpander.Content>
+                            <Grid HorizontalOptions="FillAndExpand"
+                                  Padding="20,10"
+                                  ColumnSpacing="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <buttons:SfRadioButton Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       GroupKey="{StaticResource filter}"
+                                                       Text="Date"
+                                                       FontSize="{StaticResource LabelFontSize}"
+                                                       ControlSize="{StaticResource IconFontMediumSize}"
+                                                       TextColor="{StaticResource TertiaryTextColor}"
+                                                       UncheckedColor="{StaticResource TertiaryTextColor}"
+                                                       CheckedColor="{StaticResource AccentColor}"
+                                                       IsChecked="True"
+                                                       StateChanged="FilterTypeChanged" />
+                                <buttons:SfRadioButton Grid.Row="0"
+                                                       Grid.Column="1"
+                                                       GroupKey="{StaticResource filter}"
+                                                       Text="Sales Reps"
+                                                       FontSize="{StaticResource LabelFontSize}"
+                                                       ControlSize="{StaticResource IconFontMediumSize}"
+                                                       TextColor="{StaticResource TertiaryTextColor}"
+                                                       UncheckedColor="{StaticResource TertiaryTextColor}"
+                                                       CheckedColor="{StaticResource AccentColor}"
+                                                       StateChanged="FilterTypeChanged" />
+                                <buttons:SfRadioButton Grid.Row="0"
+                                                       Grid.Column="2"
+                                                       GroupKey="{StaticResource filter}"
+                                                       Text="Customer Status"
+                                                       FontSize="{StaticResource LabelFontSize}"
+                                                       ControlSize="{StaticResource IconFontMediumSize}"
+                                                       TextColor="{StaticResource TertiaryTextColor}"
+                                                       UncheckedColor="{StaticResource TertiaryTextColor}"
+                                                       CheckedColor="{StaticResource AccentColor}"
+                                                       StateChanged="FilterTypeChanged" />
+                                <buttons:SfRadioButton Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       GroupKey="{StaticResource filter}"
+                                                       Text="Source"
+                                                       FontSize="{StaticResource LabelFontSize}"
+                                                       ControlSize="{StaticResource IconFontMediumSize}"
+                                                       TextColor="{StaticResource TertiaryTextColor}"
+                                                       UncheckedColor="{StaticResource TertiaryTextColor}"
+                                                       CheckedColor="{StaticResource AccentColor}"
+                                                       StateChanged="FilterTypeChanged" />
+                                <buttons:SfRadioButton Grid.Row="1"
+                                                       Grid.Column="1"
+                                                       GroupKey="{StaticResource filter}"
+                                                       Text="Vehicle"
+                                                       FontSize="{StaticResource LabelFontSize}"
+                                                       ControlSize="{StaticResource IconFontMediumSize}"
+                                                       TextColor="{StaticResource TertiaryTextColor}"
+                                                       UncheckedColor="{StaticResource TertiaryTextColor}"
+                                                       CheckedColor="{StaticResource AccentColor}"
+                                                       StateChanged="FilterTypeChanged" />
+                                <Button Grid.Row="1"
+                                        Grid.Column="2"
+                                        Text="FILTER"
+                                        HeightRequest="30"
+                                        TextColor="{StaticResource PrimaryTextColor}"
+                                        BackgroundColor="{StaticResource AccentColor}"
+                                        Style="{StaticResource ButtonStyle}"
+                                        CornerRadius="8"
+                                        Command="{Binding FilterCommand}" />
+                            </Grid>
+                        </expander:SfExpander.Content>
+                    </expander:SfExpander>
+                    <ListView ItemsSource="{Binding ClientList}"
+                              SelectionMode="Single"
+                              SeparatorVisibility="None"
+                              CachingStrategy="RecycleElement"
+                              HasUnevenRows="True"
+                              BackgroundColor="{StaticResource ListViewColor}"
+                              ItemTapped="ClientListItemTapped"
+                              IsVisible="{Binding IsClientListVisible}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <pancake:PancakeView Margin="6,3"
+                                                         CornerRadius="16"
+                                                         Elevation="0"
+                                                         HasShadow="False"
+                                                         BackgroundColor="{StaticResource MainDarkBgColor}">
+                                        <Grid VerticalOptions="Start"
+                                              Padding="15"
+                                              ColumnSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <imagecircle:CircleImage Grid.Column="0"
+                                                                     Source="{Binding ProfileImage}"
+                                                                     WidthRequest="70"
+                                                                     HeightRequest="70"
+                                                                     BorderThickness="0.5"
+                                                                     BorderColor="White"
+                                                                     FillColor="White"
+                                                                     Aspect="AspectFill" />
+                                            <StackLayout Grid.Column="1"
+                                                         Orientation="Vertical"
+                                                         VerticalOptions="Center"
+                                                         Margin="20,0,0,0"
+                                                         Spacing="3">
+                                                <Label Text="{Binding Name}"
+                                                       VerticalTextAlignment="Center"
+                                                       FontAttributes="Bold"
+                                                       FontSize="{StaticResource BigFontSize}"
+                                                       TextColor="{StaticResource AccentColor}"
+                                                       MaxLines="1"
+                                                       LineBreakMode="TailTruncation" />
+                                                <Label Text="{Binding Description}"
+                                                       VerticalTextAlignment="Center"
+                                                       FontSize="{StaticResource LabelFontSize}"
+                                                       TextColor="{StaticResource TertiaryTextColor}"
+                                                       MaxLines="1"
+                                                       LineBreakMode="TailTruncation"/>
+                                                <Label Text="{Binding DateCreated, StringFormat='{0:MMMM dd, yyyy}'}"
+                                                       VerticalTextAlignment="Center"
+                                                       FontSize="{StaticResource TextFontSize}"
+                                                       TextColor="{StaticResource SecondaryTextColor}"/>
+                                            </StackLayout>
+                                        </Grid>
+                                    </pancake:PancakeView>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                <StackLayout Grid.Row="1"
+                             Spacing="20"
+                             IsVisible="{Binding IsListEmpty}">
+                    <Image Source="img_empty_box.png"
+                           WidthRequest="120"
+                           HeightRequest="120"/>
+                    <Label Text="No clients added yet.&#x0a;Please click the (+) button&#x0a;below to add a client."
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"
+                           FontSize="{StaticResource HeaderFontSize}"
+                           TextColor="{StaticResource TertiaryTextColor}" />
+                </StackLayout>
+                <StackLayout Grid.Row="1"
+                             Spacing="20"
+                             IsVisible="{Binding IsSearchEmpty}">
+                    <Image Source="img_search.png"
+                           WidthRequest="120"
+                           HeightRequest="120"/>
+                    <Label Text="No search&#x0a;results found."
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"
+                           FontSize="{StaticResource HeaderFontSize}"
+                           TextColor="{StaticResource TertiaryTextColor}" />
+                </StackLayout>
+                <StackLayout Grid.Row="1"
+                             IsVisible="{Binding IsBusy}">
+                    <pancake:PancakeView VerticalOptions="Start"
+                                         HorizontalOptions="Center"
+                                         BackgroundColor="{StaticResource PrimaryColor}"
+                                         Margin="0,20,0,0"
+                                         Padding="10"
+                                         Elevation="5"
+                                         CornerRadius="8">
+                        <StackLayout Spacing="0">
+                            <ActivityIndicator VerticalOptions="Center"
+                                               HorizontalOptions="Center"
+                                               WidthRequest="100"
+                                               HeightRequest="70"
+                                               Color="White"
+                                               IsRunning="{Binding IsBusy}" />
+                            <Label Text="Loading..."
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource TertiaryTextColor}"
+                                   FontSize="{StaticResource TitleFontSize}" />
+                        </StackLayout>
+                    </pancake:PancakeView>
+                </StackLayout>
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</v:BaseContentPage>

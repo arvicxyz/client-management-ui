@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<v:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:v="clr-namespace:XamApp.Views"
+                   xmlns:vm="clr-namespace:XamApp.ViewModels"
+                   xmlns:constants="clr-namespace:XamApp.Models.Constants"
+                   xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                   x:TypeArguments="vm:ClientDetailsPageViewModel"
+                   x:Class="XamApp.Views.ClientDetailsPage"
+                   Title="{Binding PageTitle}"
+                   BackgroundColor="{StaticResource PageBgColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Priority="1"
+                     Text="Edit"
+                     IconImageSource="ic_edit.png"
+                     Clicked="EditTapped" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <pancake:PancakeView VerticalOptions="FillAndExpand"
+                             BackgroundGradientStartColor="{StaticResource PrimaryColor}"
+                             BackgroundGradientEndColor="{StaticResource PrimaryColor}"
+                             Margin="8,4,8,0"
+                             CornerRadius="20,20,0,0"
+                             Elevation="4">
+            <StackLayout Orientation="Vertical"
+                         Spacing="0">
+                <!-- Profile Image -->
+                <Image Source="{Binding SelectedClient.ProfileImage}"
+                       HeightRequest="250"
+                       VerticalOptions="Start"
+                       HorizontalOptions="FillAndExpand"
+                       Aspect="AspectFill"
+                       BackgroundColor="White"/>
+                <!-- Client Details -->
+                <ScrollView>
+                    <StackLayout Orientation="Vertical"
+                                 VerticalOptions="FillAndExpand"
+                                 Padding="10"
+                                 Spacing="10">
+                        <StackLayout Orientation="Vertical"
+                                     Padding="10"
+                                     Spacing="10">
+                            <!-- Name -->
+                            <Label Text="{Binding SelectedClient.Name}"
+                                   FontAttributes="Bold"
+                                   FontSize="{StaticResource HugeFontSize}"
+                                   TextColor="{StaticResource AccentColor}" />
+                            <!-- Description -->
+                            <Label Text="{Binding SelectedClient.Description}"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                        </StackLayout>
+                        <!-- Address -->
+                        <StackLayout Orientation="Horizontal"
+                                     VerticalOptions="Center"
+                                     Margin="10,10,0,0"
+                                     Spacing="10">
+                            <Label Text="{x:Static constants:FontAwesomeIcon.MAP_MARKER}"
+                                   FontSize="{StaticResource IconFontMediumSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}"
+                                   WidthRequest="{StaticResource IconFontMediumSize}"
+                                   HeightRequest="{StaticResource IconFontMediumSize}"
+                                   Style="{StaticResource IconStyle}" />
+                            <Label Text="Address"
+                                   FontAttributes="Bold"
+                                   FontSize="{StaticResource BigFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                        </StackLayout>
+                        <BoxView Style="{StaticResource HorizontalDividerLineStyle}"
+                                 VerticalOptions="Center" />
+                        <Grid Padding="10,0,0,0"
+                              ColumnSpacing="20"
+                              RowSpacing="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <!-- Street -->
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Text="Street:"
+                                   FontAttributes="Bold"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{Binding SelectedClient.Street}"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                            <!-- City -->
+                            <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   Text="City:"
+                                   FontAttributes="Bold"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding SelectedClient.City}"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                            <!-- State -->
+                            <Label Grid.Row="2"
+                                   Grid.Column="0"
+                                   Text="State:"
+                                   FontAttributes="Bold"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                            <Label Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="{Binding SelectedClient.State}"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                            <!-- Postal Code -->
+                            <Label Grid.Row="3"
+                                   Grid.Column="0"
+                                   Text="Postal Code:"
+                                   FontAttributes="Bold"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                            <Label Grid.Row="3"
+                                   Grid.Column="1"
+                                   Text="{Binding SelectedClient.PostalCode}"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                        </Grid>
+                        <!-- Contact Numbers -->
+                        <StackLayout Orientation="Horizontal"
+                                     VerticalOptions="Center"
+                                     Margin="10,10,0,0"
+                                     Spacing="10">
+                            <Label Text="{x:Static constants:FontAwesomeIcon.PHONE}"
+                                   FontSize="{StaticResource IconFontMediumSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}"
+                                   WidthRequest="{StaticResource IconFontMediumSize}"
+                                   HeightRequest="{StaticResource IconFontMediumSize}"
+                                   Style="{StaticResource IconStyle}" />
+                            <Label Text="Contact Numbers"
+                                   FontAttributes="Bold"
+                                   FontSize="{StaticResource BigFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                        </StackLayout>
+                        <BoxView Style="{StaticResource HorizontalDividerLineStyle}"
+                                 VerticalOptions="Center" />
+                        <Grid Padding="10,0,0,0"
+                              ColumnSpacing="20"
+                              RowSpacing="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <!-- Home Phone -->
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Text="Home:"
+                                   FontAttributes="Bold"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{Binding SelectedClient.HomePhone}"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                            <!-- Mobile Phone -->
+                            <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   Text="Mobile:"
+                                   FontAttributes="Bold"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding SelectedClient.MobilePhone}"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                            <!-- Work Phone -->
+                            <Label Grid.Row="2"
+                                   Grid.Column="0"
+                                   Text="Work:"
+                                   FontAttributes="Bold"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                            <Label Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="{Binding SelectedClient.WorkPhone}"
+                                   FontSize="{StaticResource TitleFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                        </Grid>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </pancake:PancakeView>
+    </ContentPage.Content>
+</v:BaseContentPage>

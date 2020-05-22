@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<v:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:v="clr-namespace:XamApp.Views"
+                   xmlns:vm="clr-namespace:XamApp.ViewModels"
+                   xmlns:effects="clr-namespace:XamApp.Effects"
+                   xmlns:constants="clr-namespace:XamApp.Models.Constants"
+                   xmlns:custom="clr-namespace:XamApp.Views.Custom"
+                   xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                   x:TypeArguments="vm:ClientAddEditPageViewModel"
+                   x:Class="XamApp.Views.ClientAddEditPage"
+                   Title="{Binding PageTitle}"
+                   BackgroundColor="{StaticResource PageBgColor}">
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <ScrollView>
+                <StackLayout Orientation="Vertical"
+                             Spacing="0">
+                    <!-- Profile Image -->
+                    <Grid HorizontalOptions="FillAndExpand"
+                          HeightRequest="280"
+                          BackgroundColor="{StaticResource MainWhiteColor}">
+                        <Image Source="{Binding SelectedClient.ProfileImage}"
+                               HeightRequest="200"
+                               VerticalOptions="FillAndExpand"
+                               HorizontalOptions="FillAndExpand"
+                               Aspect="AspectFill"/>
+                        <Grid ColumnSpacing="10"
+                              VerticalOptions="End"
+                              HorizontalOptions="End"
+                              Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <pancake:PancakeView Grid.Column="0"
+                                                 BackgroundColor="{StaticResource AccentColor}"
+                                                 CornerRadius="8"
+                                                 Elevation="4">
+                                <ImageButton Source="ic_capture.png"
+                                             VerticalOptions="FillAndExpand"
+                                             HorizontalOptions="FillAndExpand"
+                                             WidthRequest="60"
+                                             Padding="15,5"
+                                             BackgroundColor="{StaticResource AccentColor}" />
+                            </pancake:PancakeView>
+                            <pancake:PancakeView Grid.Column="1"
+                                                 BackgroundColor="{StaticResource AccentColor}"
+                                                 CornerRadius="8"
+                                                 Elevation="4">
+                                <ImageButton Source="ic_upload.png"
+                                             VerticalOptions="FillAndExpand"
+                                             HorizontalOptions="FillAndExpand"
+                                             WidthRequest="60"
+                                             Padding="15,5"
+                                             BackgroundColor="{StaticResource AccentColor}" />
+                            </pancake:PancakeView>
+                        </Grid>
+                    </Grid>
+                    <!-- Client Details -->
+                    <StackLayout Orientation="Vertical"
+                                 VerticalOptions="Start"
+                                 Padding="{StaticResource DefaultPaddingSize}"
+                                 Spacing="10">
+                        <!-- Name -->
+                        <StackLayout Padding="0.5"
+                                     BackgroundColor="{StaticResource MainGrayColor}"
+                                     effects:RoundCornersEffect.CornerRadius="8">
+                            <StackLayout Padding="10,0,0,0"
+                                         BackgroundColor="White"
+                                         effects:RoundCornersEffect.CornerRadius="8">
+                                <custom:BorderlessEntry Text="{Binding SelectedClient.Name}"
+                                                        Keyboard="Text"
+                                                        Placeholder="Name"
+                                                        Style="{StaticResource EntryStyle}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <!-- Description -->
+                        <pancake:PancakeView Padding="8,4"
+                                             BorderThickness="0.5"
+                                             BorderColor="{StaticResource MainGrayColor}"
+                                             CornerRadius="8"
+                                             BackgroundColor="{StaticResource MainWhiteColor}">
+                            <Editor Text="{Binding SelectedClient.Description}"
+                                    Keyboard="Text"
+                                    HeightRequest="100"
+                                    Placeholder="Description"
+                                    TextColor="{StaticResource PrimaryTextColor}"
+                                    PlaceholderColor="{StaticResource SecondaryTextColor}"
+                                    FontSize="{StaticResource InputFontSize}"
+                                    IsSpellCheckEnabled="True"
+                                    IsTextPredictionEnabled="True" />
+                        </pancake:PancakeView>
+                        <!-- Address -->
+                        <StackLayout Orientation="Horizontal"
+                                     VerticalOptions="Center"
+                                     Margin="0,10,0,0"
+                                     Spacing="10">
+                            <Label Text="{x:Static constants:FontAwesomeIcon.MAP_MARKER}"
+                                   FontSize="{StaticResource IconFontMediumSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}"
+                                   WidthRequest="{StaticResource IconFontMediumSize}"
+                                   HeightRequest="{StaticResource IconFontMediumSize}"
+                                   Style="{StaticResource IconStyle}" />
+                            <Label Text="Address"
+                                   FontAttributes="Bold"
+                                   FontSize="{StaticResource BigFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                        </StackLayout>
+                        <!-- Street -->
+                        <StackLayout Padding="0.5"
+                                     BackgroundColor="{StaticResource MainGrayColor}"
+                                     effects:RoundCornersEffect.CornerRadius="8">
+                            <StackLayout Padding="10,0,0,0"
+                                         BackgroundColor="White"
+                                         effects:RoundCornersEffect.CornerRadius="8">
+                                <custom:BorderlessEntry Text="{Binding SelectedClient.Street}"
+                                                        Keyboard="Text"
+                                                        Placeholder="Street"
+                                                        Style="{StaticResource EntryStyle}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <!-- City -->
+                        <StackLayout Padding="0.5"
+                                     BackgroundColor="{StaticResource MainGrayColor}"
+                                     effects:RoundCornersEffect.CornerRadius="8">
+                            <StackLayout Padding="10,0,0,0"
+                                         BackgroundColor="White"
+                                         effects:RoundCornersEffect.CornerRadius="8">
+                                <custom:BorderlessEntry Text="{Binding SelectedClient.City}"
+                                                        Keyboard="Text"
+                                                        Placeholder="City"
+                                                        Style="{StaticResource EntryStyle}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <Grid ColumnSpacing="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <!-- State -->
+                            <Grid Grid.Column="0"
+                                  HorizontalOptions="FillAndExpand">
+                                <StackLayout Grid.Column="0"
+                                             Padding="0.5"
+                                             BackgroundColor="{StaticResource MainGrayColor}"
+                                             effects:RoundCornersEffect.CornerRadius="8">
+                                    <StackLayout Padding="10,0,0,0"
+                                                 BackgroundColor="White"
+                                                 effects:RoundCornersEffect.CornerRadius="8">
+                                        <custom:BorderlessEntry x:Name="StateEntry"
+                                                                Text="{Binding SelectedClient.State}"
+                                                                Keyboard="Text"
+                                                                Placeholder="State"
+                                                                Style="{StaticResource EntryStyle}"
+                                                                IsEnabled="False" />
+                                    </StackLayout>
+                                </StackLayout>
+                                <custom:FontAwesomeLabel Text="{x:Static constants:FontAwesomeIcon.CARET_DOWN}"
+                                                         FontFamily="{StaticResource IconFontFamily}"
+                                                         WidthRequest="{StaticResource IconFontMediumSize}"
+                                                         HeightRequest="{StaticResource IconFontMediumSize}"
+                                                         Margin="10,0"
+                                                         VerticalOptions="Center"
+                                                         HorizontalOptions="End"
+                                                         VerticalTextAlignment="Center"
+                                                         HorizontalTextAlignment="Center"
+                                                         FontSize="{StaticResource IconFontMediumSize}"
+                                                         TextColor="{StaticResource DividerColor}" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapStateCommand}"
+                                                          CommandParameter="{Binding Source={x:Reference StateEntry}, Path=.}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                            <!-- Postal Code -->
+                            <StackLayout Grid.Column="1"
+                                         Padding="0.5"
+                                         BackgroundColor="{StaticResource MainGrayColor}"
+                                         effects:RoundCornersEffect.CornerRadius="8">
+                                <StackLayout Padding="10,0,0,0"
+                                             BackgroundColor="White"
+                                             effects:RoundCornersEffect.CornerRadius="8">
+                                    <custom:BorderlessEntry Text="{Binding SelectedClient.PostalCode}"
+                                                            Keyboard="Numeric"
+                                                            Placeholder="Postal Code"
+                                                            Style="{StaticResource EntryStyle}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
+                        <!-- Contact Numbers -->
+                        <StackLayout Orientation="Horizontal"
+                                     VerticalOptions="Center"
+                                     Margin="0,10,0,0"
+                                     Spacing="10">
+                            <Label Text="{x:Static constants:FontAwesomeIcon.PHONE}"
+                                   FontSize="{StaticResource IconFontMediumSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}"
+                                   WidthRequest="{StaticResource IconFontMediumSize}"
+                                   HeightRequest="{StaticResource IconFontMediumSize}"
+                                   Style="{StaticResource IconStyle}" />
+                            <Label Text="Contact Numbers"
+                                   FontAttributes="Bold"
+                                   FontSize="{StaticResource BigFontSize}"
+                                   TextColor="{StaticResource TertiaryTextColor}" />
+                        </StackLayout>
+                        <!-- Home Phone -->
+                        <StackLayout Padding="0.5"
+                                     BackgroundColor="{StaticResource MainGrayColor}"
+                                     effects:RoundCornersEffect.CornerRadius="8">
+                            <StackLayout Padding="10,0,0,0"
+                                         BackgroundColor="White"
+                                         effects:RoundCornersEffect.CornerRadius="8">
+                                <custom:BorderlessEntry Text="{Binding SelectedClient.HomePhone}"
+                                                        Keyboard="Telephone"
+                                                        Placeholder="Home Phone"
+                                                        Style="{StaticResource EntryStyle}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <!-- Mobile Phone -->
+                        <StackLayout Padding="0.5"
+                                     BackgroundColor="{StaticResource MainGrayColor}"
+                                     effects:RoundCornersEffect.CornerRadius="8">
+                            <StackLayout Padding="10,0,0,0"
+                                         BackgroundColor="White"
+                                         effects:RoundCornersEffect.CornerRadius="8">
+                                <custom:BorderlessEntry Text="{Binding SelectedClient.MobilePhone}"
+                                                        Keyboard="Telephone"
+                                                        Placeholder="Mobile Phone"
+                                                        Style="{StaticResource EntryStyle}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <!-- Work Phone -->
+                        <StackLayout Padding="0.5"
+                                     BackgroundColor="{StaticResource MainGrayColor}"
+                                     effects:RoundCornersEffect.CornerRadius="8">
+                            <StackLayout Padding="10,0,0,0"
+                                         BackgroundColor="White"
+                                         effects:RoundCornersEffect.CornerRadius="8">
+                                <custom:BorderlessEntry Text="{Binding SelectedClient.WorkPhone}"
+                                                        Keyboard="Telephone"
+                                                        Placeholder="Work Phone"
+                                                        Style="{StaticResource EntryStyle}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Padding="20,10,20,20"
+                         BackgroundColor="{StaticResource MainDarkBgColor}">
+                <Button Text="SAVE"
+                        TextColor="{StaticResource PrimaryTextColor}"
+                        BackgroundColor="{StaticResource AccentColor}"
+                        Style="{StaticResource ButtonStyle}"
+                        CornerRadius="8" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</v:BaseContentPage>

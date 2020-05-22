@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="launcher_background">#E93636</color>
+  <color name="brand_blue">#1D3150</color>
+  <color name="brand_black">#343542</color>
+  <color name="brand_yellow">#FFBA00</color>
+  <color name="primary">#1D3150</color>
+  <color name="primary_dark">#03203F</color>
+  <color name="primary_light">#375D98</color>
+  <color name="accent">#FFBA00</color>
+  <color name="primary_text">#212121</color>
+  <color name="secondary_text">#757575</color>
+  <color name="tertiary_text">#FAFAFA</color>
+  <color name="icons">#FFFFFF</color>
+  <color name="divider">#BDBDBD</color>
+  <color name="pressed">#D89D00</color>
+  <color name="disabled">#FFD562</color>
+  <color name="selector">#E1E1E1</color>
+  <color name="list_view">#FFFFFF</color>
+  <color name="main_light_bg">#454758</color>
+  <color name="main_dark_bg">#343542</color>
+</resources>
