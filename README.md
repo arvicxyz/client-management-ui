@@ -1,6 +1,8 @@
-# Client Management UI
+# Introduction
 
 A client management app UI with custom bottom app bar made using Xamarin.Forms.
+
+# Development
 
 Xamarin UI components: PancakeView + Expander + Radio Button + Custom Bottom App Bar
 
