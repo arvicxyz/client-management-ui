@@ -35,8 +35,11 @@
                             </Grid.ColumnDefinitions>
                             <pancake:PancakeView Grid.Column="0"
                                                  BackgroundColor="{StaticResource AccentColor}"
-                                                 CornerRadius="8"
-                                                 Elevation="4">
+                                                 CornerRadius="8">
+                                <pancake:PancakeView.Shadow>
+                                    <pancake:DropShadow Color="#000000"
+                                                        Offset="4,4" />
+                                </pancake:PancakeView.Shadow>
                                 <ImageButton Source="ic_capture.png"
                                              VerticalOptions="FillAndExpand"
                                              HorizontalOptions="FillAndExpand"
@@ -46,8 +49,11 @@
                             </pancake:PancakeView>
                             <pancake:PancakeView Grid.Column="1"
                                                  BackgroundColor="{StaticResource AccentColor}"
-                                                 CornerRadius="8"
-                                                 Elevation="4">
+                                                 CornerRadius="8">
+                                <pancake:PancakeView.Shadow>
+                                    <pancake:DropShadow Color="#000000"
+                                                        Offset="4,4" />
+                                </pancake:PancakeView.Shadow>
                                 <ImageButton Source="ic_upload.png"
                                              VerticalOptions="FillAndExpand"
                                              HorizontalOptions="FillAndExpand"
@@ -77,10 +83,12 @@
                         </StackLayout>
                         <!-- Description -->
                         <pancake:PancakeView Padding="8,4"
-                                             BorderThickness="0.5"
-                                             BorderColor="{StaticResource MainGrayColor}"
                                              CornerRadius="8"
                                              BackgroundColor="{StaticResource MainWhiteColor}">
+                            <pancake:PancakeView.Border>
+                                <pancake:Border Color="{StaticResource MainGrayColor}"
+                                                Thickness="1" />
+                            </pancake:PancakeView.Border>
                             <Editor Text="{Binding SelectedClient.Description}"
                                     Keyboard="Text"
                                     HeightRequest="100"

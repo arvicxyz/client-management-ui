@@ -192,8 +192,6 @@
                                 <ViewCell>
                                     <pancake:PancakeView Margin="6,3"
                                                          CornerRadius="16"
-                                                         Elevation="0"
-                                                         HasShadow="False"
                                                          BackgroundColor="{StaticResource MainDarkBgColor}">
                                         <Grid VerticalOptions="Start"
                                               Padding="15"
@@ -274,8 +272,11 @@
                                          BackgroundColor="{StaticResource PrimaryColor}"
                                          Margin="0,20,0,0"
                                          Padding="10"
-                                         Elevation="5"
                                          CornerRadius="8">
+                        <pancake:PancakeView.Shadow>
+                            <pancake:DropShadow Color="#000000"
+                                                Offset="5,5" />
+                        </pancake:PancakeView.Shadow>
                         <StackLayout Spacing="0">
                             <ActivityIndicator VerticalOptions="Center"
                                                HorizontalOptions="Center"

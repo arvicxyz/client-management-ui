@@ -17,11 +17,13 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <pancake:PancakeView VerticalOptions="FillAndExpand"
-                             BackgroundGradientStartColor="{StaticResource PrimaryColor}"
-                             BackgroundGradientEndColor="{StaticResource PrimaryColor}"
+                             BackgroundColor="{StaticResource PrimaryColor}"
                              Margin="8,4,8,0"
-                             CornerRadius="20,20,0,0"
-                             Elevation="4">
+                             CornerRadius="20,20,0,0">
+            <pancake:PancakeView.Shadow>
+                <pancake:DropShadow Color="#000000"
+                                    Offset="4,4" />
+            </pancake:PancakeView.Shadow>
             <StackLayout Orientation="Vertical"
                          Spacing="0">
                 <!-- Profile Image -->
